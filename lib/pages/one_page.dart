@@ -1,5 +1,9 @@
+
+
+import 'package:database/pages/two_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class OnePage extends StatefulWidget {
   static final String id="one_page";
@@ -10,6 +14,20 @@ class OnePage extends StatefulWidget {
 }
 
 class _OnePageState extends State<OnePage> {
+  final usernameController=TextEditingController();
+  final passwordController=TextEditingController();
+
+  void _doLogin(){
+    String username=usernameController.text.toString().trim();
+    String password=passwordController.text.toString().trim();
+    var box=Hive.box("pdp_online");
+    box.put("username", username);
+    box.put("password", password);
+    String id= box.get("username");
+    String pw=box.get("password");
+    print(id);
+    print(pw);
+  }
 
 
   @override
@@ -23,13 +41,9 @@ class _OnePageState extends State<OnePage> {
             SizedBox(height: 120,),
              Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-
-
-              children: [
+               children: [
                 //#image
                 Container(
-
-
                   height: 70,
                   width: 70,
                   decoration: BoxDecoration(
@@ -48,20 +62,30 @@ class _OnePageState extends State<OnePage> {
                 Text("Sign in to continue",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
                 SizedBox(height: 30,),
                 TextField(
+                  controller: usernameController,
+                  style: TextStyle(color: Colors.white),
+
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.person,color: Colors.white,),
                       hintText: "username",hintStyle:TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
 
+                    ),
 
 
                   ),
                     ),
                 SizedBox(height: 15,),
                 TextField(
-
+                  controller: passwordController,
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock_outline,color: Colors.white,),
                     hintText: "password",hintStyle:TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
                   ),
                 ),
                 SizedBox(height: 30,),
@@ -75,7 +99,14 @@ class _OnePageState extends State<OnePage> {
                     color: Colors.blueAccent
                   ),
                   child:Center(
-                    child: Icon(Icons.arrow_forward,color: Colors.white,size: 40,),
+                    child: FlatButton(
+                      onPressed: (){
+                        _doLogin;
+                      },
+                      child: Center(
+                        child: Icon(Icons.arrow_forward,color: Colors.white,size: 40,),
+                      ),
+                    )
                   ),
                 ),
                 SizedBox(height: 99,),
@@ -83,7 +114,12 @@ class _OnePageState extends State<OnePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Don't have an account?",style: TextStyle(color: Colors.white,fontSize: 15),),
-                    Text("  SIGN UP",style: TextStyle(color: Colors.blueAccent,fontSize: 17,fontWeight: FontWeight.bold),)
+                   GestureDetector(
+                     onTap: (){
+                       Navigator.pushNamed(context, TwoPage.id);
+                     },
+                     child:  Text("  SIGN UP",style: TextStyle(color: Colors.blueAccent,fontSize: 17,fontWeight: FontWeight.bold),),
+                   )
                   ],
                 ),
 

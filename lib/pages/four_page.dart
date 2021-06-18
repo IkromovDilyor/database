@@ -1,18 +1,17 @@
 import 'package:database/model/user_model.dart';
-import 'package:database/pages/four_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-class ThreePage extends StatefulWidget {
-  static final String id="three_page";
-  const ThreePage({Key key}) : super(key: key);
+class FourPage extends StatefulWidget {
+  static final String id="four_page";
+  const FourPage({Key key}) : super(key: key);
 
   @override
-  _ThreePageState createState() => _ThreePageState();
+  _FourPageState createState() => _FourPageState();
 }
 
-class _ThreePageState extends State<ThreePage> {
+class _FourPageState extends State<FourPage> {
   final usernameController=TextEditingController();
   final passwordController=TextEditingController();
   final phonenumberController=TextEditingController();
@@ -43,18 +42,7 @@ class _ThreePageState extends State<ThreePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 30,),
-            Container(
-              margin: EdgeInsets.only(left: 20,top: 30),
-              height: 60,
-              width: 60,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage("assets/images/1.jpg"),
-                  fit: BoxFit.cover
-                )
-              ),
-            ),
+
             Padding(
               padding: EdgeInsets.all(20),
               child: Column(
@@ -110,31 +98,38 @@ class _ThreePageState extends State<ThreePage> {
                         ),
                         SizedBox(height: 20,),
                         TextField(
-                          controller: passwordController,
+                          controller: phonenumberController,
 
                           decoration: InputDecoration(
-                            labelText: "Password",labelStyle: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
-                            hintText: "Enter Password",hintStyle:TextStyle(color: Colors.grey,fontSize: 14),
+                            labelText: "Number",labelStyle: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
+                            hintText: "Phone Number",hintStyle:TextStyle(color: Colors.grey,fontSize: 14),
                           ),
                         ),
-                        SizedBox(height: 45,),
-                        Text("Forget Password?",style: TextStyle(color: Colors.grey,fontSize: 18),),
+                        SizedBox(height: 20,),
+                        TextField(
+                          controller: usernameController,
+
+                          decoration: InputDecoration(
+                            labelText: "Address",labelStyle: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
+                            hintText: "Address",hintStyle:TextStyle(color: Colors.grey,fontSize: 14),
+                          ),
+                        ),
+                        SizedBox(height: 30,),
+
                         SizedBox(height: 30,),
                         Container(
                           height: 50,
                           margin: EdgeInsets.symmetric(horizontal: 15),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color:Color(0xff077f7b),
+                            borderRadius: BorderRadius.circular(5),
+                            color:Color(0xff077f7b),
                           ),
                           child: Center(
                             child: FlatButton(
-                              onPressed: (){
-                                _doLogin;
-                              },
-                              child:Center(
-                                child:  Text("Sign In",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
-                              )
+                              onPressed: (){},
+                              child: Center(
+                                child: Text("Sign Up",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                              ),
                             )
                           ),
                         ),
@@ -157,7 +152,7 @@ class _ThreePageState extends State<ThreePage> {
 
                           ],
                         ),
-                        SizedBox(height: 40,),
+                        SizedBox(height: 50,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -167,11 +162,11 @@ class _ThreePageState extends State<ThreePage> {
                               width: 50,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                            image: DecorationImage(
+                                image: DecorationImage(
 
-                              image: AssetImage("assets/images/fl.png",),
-                              fit: BoxFit.cover,
-                            ),
+                                  image: AssetImage("assets/images/fl.png",),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
 
                             ),
@@ -210,21 +205,14 @@ class _ThreePageState extends State<ThreePage> {
 
                           ],
                         ),
-                        SizedBox(height: 35,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Don't have an account?",style: TextStyle(color: Colors.grey,fontSize: 15),),
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.pushNamed(context,FourPage.id);
-                        },
-                        child: Text("  Sign Up",style: TextStyle(color: Color(0xff077f7b),fontSize: 17,fontWeight: FontWeight.bold),),
-
-                      ),
-
-                  ],
-                )
+                        SizedBox(height: 60,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Already have an account?",style: TextStyle(color: Colors.grey,fontSize: 15),),
+                            Text("  Sign In",style: TextStyle(color: Color(0xff077f7b),fontSize: 17,fontWeight: FontWeight.bold),)
+                          ],
+                        )
                         // #login SNS
 
                       ],
@@ -239,5 +227,3 @@ class _ThreePageState extends State<ThreePage> {
     );
   }
 }
-
-

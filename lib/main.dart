@@ -1,13 +1,16 @@
+import 'package:database/pages/four_page.dart';
 import 'package:database/pages/home_page.dart';
 import 'package:database/pages/one_page.dart';
 import 'package:database/pages/three_page.dart';
 import 'package:database/pages/two_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> main() async {
- await  Hive.initFlutter();
- await Hive.openBox("pdp_online");
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  var box = await Hive.openBox('pdp_online');
   runApp(MyApp());
 }
 
@@ -21,7 +24,13 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:ThreePage(),
+      home:OnePage(),
+      routes: {
+        OnePage.id:(context)=>OnePage(),
+        TwoPage.id:(context)=>TwoPage(),
+        ThreePage.id:(context)=>ThreePage(),
+        FourPage.id:(context)=>FourPage(),
+      },
     );
   }
 }

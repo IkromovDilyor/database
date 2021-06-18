@@ -1,3 +1,7 @@
+
+
+import 'package:database/model/user_model.dart';
+import 'package:database/pages/three_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +14,21 @@ class TwoPage extends StatefulWidget {
 }
 
 class _TwoPageState extends State<TwoPage> {
+  final usernameController=TextEditingController();
+  final passwordController=TextEditingController();
+  final phonenumberController=TextEditingController();
+  final emailController=TextEditingController();
+
+  void _doLogin(){
+
+
+    String username=usernameController.toString().trim();
+    String password=passwordController.toString().trim();
+    String phonenumber=phonenumberController.toString().trim();
+    String email=emailController.toString().trim();
+
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +48,14 @@ class _TwoPageState extends State<TwoPage> {
 
                 SizedBox(height: 90,),
                 TextField(
+                  style: TextStyle(color: Colors.white),
+                  controller:usernameController ,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.person,color: Colors.white,),
                     hintText: "User Name",hintStyle:TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
 
 
 
@@ -39,24 +63,39 @@ class _TwoPageState extends State<TwoPage> {
                 ),
                 SizedBox(height: 20,),
                 TextField(
+                  style: TextStyle(color: Colors.white),
+                  controller: emailController,
 
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.email_outlined,color: Colors.white,),
                     hintText: "E-Mail",hintStyle:TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
                   ),
                 ),
                 SizedBox(height: 20,),
                 TextField(
+                  style: TextStyle(color: Colors.white),
+                  controller: phonenumberController,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.phone,color: Colors.white,),
                     hintText: "Phone Number",hintStyle:TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
                   ),
                 ),
                 SizedBox(height: 20,),
                 TextField(
+                  style: TextStyle(color: Colors.white),
+                  controller: passwordController,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock,color: Colors.white,),
                     hintText: "Password",hintStyle:TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
 
 
 
@@ -72,7 +111,14 @@ class _TwoPageState extends State<TwoPage> {
                       color: Colors.blueAccent
                   ),
                   child:Center(
-                    child: Icon(Icons.arrow_forward,color: Colors.white,size: 40,),
+                    child: FlatButton(
+                      onPressed: (){
+                        _doLogin;
+                      },
+                      child: Center(
+                        child: Icon(Icons.arrow_forward,color: Colors.white,size: 40,),
+                      ),
+                    )
                   ),
                 ),
                 SizedBox(height: 70,),
@@ -80,7 +126,12 @@ class _TwoPageState extends State<TwoPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Already have an account ?",style: TextStyle(color: Colors.white,fontSize: 15),),
-                    Text("  SIGN UP",style: TextStyle(color: Colors.blueAccent,fontSize: 17,fontWeight: FontWeight.bold),)
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, ThreePage.id);
+                    },
+                    child:   Text("  SIGN UP",style: TextStyle(color: Colors.blueAccent,fontSize: 17,fontWeight: FontWeight.bold),),
+                  )
                   ],
                 ),
               ],
